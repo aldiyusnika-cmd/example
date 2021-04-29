@@ -8,7 +8,7 @@ var json = require('json');
 var logger = require('logger');
 var methodOverride = require('method-override');
 
-var nano = require ('nano') ('http://localhost:5984/');
+var nano = require ('nano') ('http://localhost:5984');
 
 var db = nano.use('address');
 var app = express();
