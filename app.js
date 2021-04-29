@@ -8,7 +8,7 @@ var json = require('json');
 var logger = require('logger');
 var methodOverride = require('method-override');
 
-var nano = require ('nano') ('http://localhost:5984');
+var nano = require ('nano') ('http://admin:admin@127.0.0.1:5984');
 
 var db = nano.use('address');
 var app = express();
@@ -27,6 +27,7 @@ app.get ('/',routes.index);
 app.post ('/createdb', function(req, res){
     nano.db.create(req.body.dbname, function(err){
         if (err) {
+            console.log(err)
             res.send("Error Creating Database " + req.body.dbname);
             return;
         }
@@ -68,9 +69,9 @@ app.post('/view_contact', function(req,res){
 });
 
 app.post('/delete_contact', function(req, res){
-    db.get(req.body.phone, {revs_info:true, function (err,body) {
+    db.get(req.body.phone, {revs_info:true}, function(err,body) {
         if(!err){
-            db.destroy(req.body.phone), body_rev, function (err, body) {
+            db.destroy(req.body.phone), body._rev, function (err, body) {
                 if (err) {
                     res.send("error deleting contact");
                 }
@@ -79,7 +80,7 @@ app.post('/delete_contact', function(req, res){
             res.send("Contact deleted successfully");
         }
         
-    }});
+    });
 });
 
 http.createServer(app).listen(app.get('port'), function() {

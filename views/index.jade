@@ -9,11 +9,11 @@ block content
         input#title(type="text", name="phone") 
         p: button(type="submit") Add new Contact 
 
-    h1 Create Database 
+    h1 Add new Database
     form(method="POST", action="/createdb")
-        p Phone Number:
-        input#title(type="text", name="dbname") 
-        p: button(type="submit") Create DB  
+        p Database name:
+            input#title(type="text",name="dbname")
+            p: button(type="submit") Add new Database
 
     h1 enter Phone number to delete new_contact 
     form(method="POST" , action="/delete_contact")
